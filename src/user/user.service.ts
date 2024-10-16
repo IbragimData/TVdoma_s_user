@@ -1,5 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { createUserDto } from './dto';
+import { userInfo } from 'os';
 
 @Injectable()
 export class UserService {
@@ -13,6 +15,18 @@ export class UserService {
                     {mail: idOrMail},
                     {id: idOrMail}
                 ]
+            }
+        })
+    }
+
+    async createUser(dto:createUserDto){
+        const user = await this.getUserByIdOrMail(dto.mail)
+        if(user){
+            throw new BadRequestException()
+        }
+        return await this.prismaService.user.create({
+            data: {
+                ...dto
             }
         })
     }
