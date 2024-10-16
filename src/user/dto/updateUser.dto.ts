@@ -1,3 +1,3 @@
-export class updateUser {
+export class updateUserDto {
     name: string
 }

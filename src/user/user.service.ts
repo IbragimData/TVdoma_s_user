@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { createUserDto, updateUser } from './dto';
+import { createUserDto, updateUserDto } from './dto';
 import { userInfo } from 'os';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class UserService {
         })
     }
 
-    async updateUserName(dto:updateUser, userId:string){
+    async updateUserName(dto:updateUserDto, userId:string){
         const user = await this.getUserByIdOrMail(userId)
         if(!user){
             throw new BadRequestException()
