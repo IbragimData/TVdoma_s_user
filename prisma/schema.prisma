@@ -14,8 +14,10 @@ datasource db {
 }
 
 model User {
-  id String @id @default(uuid())
-  mail String 
-  password String
-  name String?
+  id    String  @id @default(uuid())
+  email  String
+  phone String
+  name  String?
+
+  @@index([id, email, phone])
 }
